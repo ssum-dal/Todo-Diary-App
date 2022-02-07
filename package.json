@@ -15,7 +15,11 @@
     "react": "17.0.2",
     "react-native": "0.67.2",
     "react-native-gesture-handler": "^2.2.0",
-    "react-native-safe-area-context": "^3.3.2"
+    "react-native-ionicons": "^4.6.5",
+    "react-native-raw-bottom-sheet": "^2.2.0",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-swipe-list-view": "^3.2.9",
+    "react-native-vector-icons": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.17.0",
