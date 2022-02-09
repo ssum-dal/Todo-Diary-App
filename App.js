@@ -1,6 +1,6 @@
 import React from 'react';
 import "react-native-gesture-handler";
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator, CardStyleInterpolators } from "@react-navigation/stack";
 import Home from "./Screens/Home";
