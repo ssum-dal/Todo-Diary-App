@@ -7,7 +7,13 @@ const s = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#ffffff',
-        marginVertical: 10,
+        marginVertical: '5%',
+        height: 50,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        marginHorizontal: 5,
     },
 });
 
