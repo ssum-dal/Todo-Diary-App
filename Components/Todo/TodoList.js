@@ -7,6 +7,19 @@ const s = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#ffffff',
         alignItems: 'center',
+        height: 50,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        marginHorizontal: 5,
+        marginBottom: 5
+    },
+    CheckBoxView: {
+        marginHorizontal: 5
+    },
+    TextView: {
+        fontSize: 15
     }
 });
 
@@ -18,8 +31,9 @@ function TodoList({title}) {
             <CheckBox
                 value={isCompleted}
                 onValueChange={(v) => setCompleted(v)}
+                style={s.CheckBoxView}
             />
-            <Text>{title}</Text>
+            <Text style={s.TextView}>{title}</Text>
         </View>
     );
 }

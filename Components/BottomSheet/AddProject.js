@@ -23,8 +23,6 @@ function AddProject({bottomSheet, addProject}) {
     const [textValue, setTextValue] = useState('');
     const [disabled, setDisabled] = useState(true);
 
-    console.log(bottomSheet.current)
-
     const updateAddButton = (text) => {
         if (text.trim().length === 0) {
             setDisabled(true)

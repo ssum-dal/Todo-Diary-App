@@ -10,6 +10,11 @@ const s = StyleSheet.create({
     },
     TodoView: {
         marginVertical: 10
+    },
+    TodoText: {
+        fontSize: 16,
+        marginBottom: 10,
+        marginHorizontal: 5
     }
 });
 
@@ -47,7 +52,7 @@ function Today({navigation}) {
                     <>
                     <AddWork addWork={addWork}/>
                     <View style={s.TodoView}>
-                        <Text>할 일</Text>
+                        <Text style={s.TodoText}>할 일</Text>
                         <FlatList
                             data={workList}
                             renderItem={renderTodo}

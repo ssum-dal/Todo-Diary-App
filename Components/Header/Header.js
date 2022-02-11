@@ -8,6 +8,9 @@ const s = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#ffffff'
+    },
+    TextView: {
+        fontSize: 16
     }
 });
 
@@ -20,7 +23,7 @@ function Header({title, navigation}) {
             >
                 <Icon name="chevron-back" color="#000000" size={30} style={{padding:5}}/>
             </TouchableOpacity>
-            <Text>{title}</Text>
+            <Text style={s.TextView}>{title}</Text>
             <Icon name="chevron-back" color="#ffffff" size={30}/>
         </View>
     );

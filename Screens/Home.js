@@ -7,7 +7,7 @@ import AddProject from '../Components/BottomSheet/AddProject';
 const s = StyleSheet.create({
 	Home: {
 	  flex: 1,
-	  backgroundColor: '#ffffff'
+	  backgroundColor: '#f9f9f9'
 	},
   	TopView: {
 
@@ -18,22 +18,22 @@ const s = StyleSheet.create({
   	SubItem: {
     	flexDirection: 'row',
     	alignItems: 'center',
-    	backgroundColor: 'yellow'
+		height: 60,
+		paddingHorizontal: 5
   	},
   	SwipeList: {
+		flexDirection: 'row',
     	alignItems: 'center',
-    	borderBottomColor: '#fff',
-    	borderBottomWidth: 1,
-    	justifyContent: 'center',
-    	height: 50,
-    	backgroundColor: '#eee',
+		height: 60,
+		paddingHorizontal: 5,
+    	backgroundColor: '#f9f9f9',
   	},
   	SwipeHiddenItemContainer: {
     	flex: 1,
     	height: '100%',
     	justifyContent: 'flex-end',
     	alignItems: 'center',
-    	backgroundColor: '#ffffff',
+    	backgroundColor: '#f9f9f9',
     	flexDirection: 'row',
   	},
   	SwipeHiddenItem: {
@@ -49,19 +49,21 @@ const s = StyleSheet.create({
   	AddProject: {
   	  	flexDirection: 'row',
   	  	alignItems: 'center'
-  	}
+  	},
+	TextView: {
+		fontSize: 18,
+		marginHorizontal: 15
+	}
 });
 
 const project = [
 	{id: 1, title: '할 일'},
-	{id: 2, title: '할 일2'}
 ]
 
-function Home({ navigation }) {
+function Home({navigation}) {
 	let bottomSheet = useRef();
 	const [projectData, setProjectData] = useState(project)
 
-	//id 안겹치도록 수정
 	const addProject = (title) => {
 		const newProject = {
 			id: 3,
@@ -85,27 +87,38 @@ function Home({ navigation }) {
         	<>
         	<View style={s.TopView}>
             	<TouchableOpacity
+					activeOpacity={1}
                 	style={s.SubItem}
                 	onPress={() => navigation.push('Today')}
               	>
-                	<Icon name='sunny' color='red' size={45} />
-                	<Text>오늘</Text>
+                	<Icon name='sunny' color='#CDF0EA' size={30} />
+                	<Text style={s.TextView}>오늘</Text>
               	</TouchableOpacity>
               	<TouchableOpacity
                 	style={s.SubItem}
                 	onPress={() => navigation.push('Upcoming')}
               	>
-                	<Icon name='sunny' color='red' size={45} />
-                	<Text>추후</Text>
+                	<Icon name='calendar' color='#BEAEE2' size={30} />
+                	<Text style={s.TextView}>추후</Text>
               	</TouchableOpacity>
             </View>
             <View style={s.ProjectView}>
               	<SwipeListView
                 	data={projectData}
                 	renderItem={(data, rowMap) => (
-                  		<View style={s.SwipeList}>
-                    		<Text numberOfLines={1} ellipsizeMode="tail">{data.item.title}</Text>
-                  		</View>
+						<TouchableOpacity
+							activeOpacity={1}
+							style={s.SwipeList}
+						>
+							<Icon name="ellipse" color="#F7DBF0" size={25}/>
+                    		<Text 
+								style={s.TextView} 
+								numberOfLines={1} 
+								ellipsizeMode="tail"
+							>
+								{data.item.title}
+							</Text>
+						</TouchableOpacity>
                 	)}
                 	renderHiddenItem={(data, rowMap) => (
                   		<View style={s.SwipeHiddenItemContainer}>
@@ -130,11 +143,13 @@ function Home({ navigation }) {
               	/>
             </View>
             <TouchableOpacity
+				style={s.SubItem}
+				activeOpacity={1}
             	onPress={() => bottomSheet.current.open()}
             >
             	<View style={s.AddProject}>
                 	<Icon name='add' color='#000000' size={30} />
-                	<Text>프로젝트 추가</Text>
+                	<Text style={s.TextView}>프로젝트 추가</Text>
               	</View>
             </TouchableOpacity>
         	</>}
