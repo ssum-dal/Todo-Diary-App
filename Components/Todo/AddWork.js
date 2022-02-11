@@ -13,10 +13,21 @@ const s = StyleSheet.create({
 
 function AddWork({addWork}) {
     const [textValue, setTextValue] = useState('');
+    const [disabled, setDisabled] = useState(true);
+
+    const updateAddButton = (text) => {
+        if (text.trim().length === 0) {
+            setDisabled(true)
+        } else {
+            setDisabled(false)
+        }
+        setTextValue(text)
+    }
 
     return (
         <View style={s.AddWork}>
             <TouchableOpacity
+                disabled={disabled}
                 onPress={() => {
                     addWork(textValue)
                     setTextValue('')
@@ -24,10 +35,13 @@ function AddWork({addWork}) {
             >
                 <Icon name="add" color="#000000" size={30}/>
             </TouchableOpacity>
-            <TextInput 
+            <TextInput
+                style={{width: '100%'}}
                 placeholder="작업 추가"
                 value={textValue}
-                onChangeText={(text) => setTextValue(text)}
+                onChangeText={(text) => {
+                    updateAddButton(text)
+                }}
                 maxLength={20}
             />
         </View>
