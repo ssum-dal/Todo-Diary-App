@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const s = StyleSheet.create({
@@ -15,42 +15,30 @@ const s = StyleSheet.create({
         borderBottomRightRadius: 10,
         marginHorizontal: 5,
     },
+    TextView: {
+        fontSize: 16,
+        marginHorizontal: '3%'
+    }
 });
 
-function AddWork({addWork}) {
-    const [textValue, setTextValue] = useState('');
-    const [disabled, setDisabled] = useState(true);
-
-    const updateAddButton = (text) => {
-        if (text.trim().length === 0) {
-            setDisabled(true)
-        } else {
-            setDisabled(false)
-        }
-        setTextValue(text)
-    }
-
+function AddWork({navigation, index}) {
     return (
-        <View style={s.AddWork}>
-            <TouchableOpacity
-                disabled={disabled}
-                onPress={() => {
-                    addWork(textValue)
-                    setTextValue('')
-                }}
-            >
+        <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => {
+                navigation.push('AddWork', {
+                    isEditing: false,
+                    projectIndex: index,
+                    workId: null,
+                    workName: ''
+                })
+            }}
+        >
+            <View style={s.AddWork}>
                 <Icon name="add" color="#000000" size={30}/>
-            </TouchableOpacity>
-            <TextInput
-                style={{width: '100%'}}
-                placeholder="작업 추가"
-                value={textValue}
-                onChangeText={(text) => {
-                    updateAddButton(text)
-                }}
-                maxLength={20}
-            />
-        </View>
+                <Text style={s.TextView}>작업 추가</Text>
+            </View>
+        </TouchableOpacity>
     );
 }
 

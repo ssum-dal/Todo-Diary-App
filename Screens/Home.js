@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import AddProject from '../Components/BottomSheet/AddProject';
+import { requestDeleteProject } from "../Context/Reducer/projectReducer";
 
 const s = StyleSheet.create({
 	Home: {
@@ -56,27 +57,12 @@ const s = StyleSheet.create({
 	}
 });
 
-const project = [
-	{id: 1, title: '할 일'},
-]
-
 function Home({navigation}) {
-	let bottomSheet = useRef();
-	const [projectData, setProjectData] = useState(project)
-
-	const addProject = (title) => {
-		const newProject = {
-			id: 3,
-			title: title
-		}
-		setProjectData(prev => [
-			...prev,
-			newProject
-		]);
-	}
+	const projectData = useSelector(state => state.project.project);
+	const dispatch = useDispatch();
 
 	const deleteProject = (id) => {
-		setProjectData(projectData.filter(item => item.id !== id))
+		dispatch(requestDeleteProject(id));
 	}
 
 	return (
@@ -95,6 +81,7 @@ function Home({navigation}) {
                 	<Text style={s.TextView}>오늘</Text>
               	</TouchableOpacity>
               	<TouchableOpacity
+				  	activeOpacity={1}
                 	style={s.SubItem}
                 	onPress={() => navigation.push('Upcoming')}
               	>
@@ -109,6 +96,10 @@ function Home({navigation}) {
 						<TouchableOpacity
 							activeOpacity={1}
 							style={s.SwipeList}
+							onPress={() => {
+								const index = projectData.findIndex((v) => v.id === data.item.id)
+								navigation.push('ProjectContent', { data: data.item, index: index }
+							)}}
 						>
 							<Icon name="ellipse" color="#F7DBF0" size={25}/>
                     		<Text 
@@ -123,7 +114,14 @@ function Home({navigation}) {
                 	renderHiddenItem={(data, rowMap) => (
                   		<View style={s.SwipeHiddenItemContainer}>
                     		<TouchableOpacity
-                      			onPress={() => console.log(`${data.item.text} right is pressed`)}
+                      			onPress={() => {
+									
+									navigation.push('AddProject', {
+									  	isEditing: true,
+									  	projectName: data.item.title,
+										projectId: data.item.id
+								  	})}
+								}
 							>
                       		<View style={[s.SwipeHiddenItem, { backgroundColor: 'skyblue' }]}>
                         		<Text style={s.SwipeHiddenItemText}>수정</Text>
@@ -145,7 +143,11 @@ function Home({navigation}) {
             <TouchableOpacity
 				style={s.SubItem}
 				activeOpacity={1}
-            	onPress={() => bottomSheet.current.open()}
+            	onPress={() => navigation.push('AddProject', {
+					isEditing: false,
+					projectName: '',
+					projectId: null
+				})}
             >
             	<View style={s.AddProject}>
                 	<Icon name='add' color='#000000' size={30} />
@@ -154,10 +156,6 @@ function Home({navigation}) {
             </TouchableOpacity>
         	</>}
       />
-    <AddProject
-    	bottomSheet={bottomSheet}
-		addProject={addProject}
-    />
     </>);
 }
 
