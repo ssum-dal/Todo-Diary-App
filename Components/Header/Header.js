@@ -11,7 +11,9 @@ const s = StyleSheet.create({
         backgroundColor: '#ffffff'
     },
     TextView: {
-        fontSize: 16
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#000000'
     }
 });
 
