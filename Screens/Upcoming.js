@@ -6,7 +6,7 @@ import AddWork from "../Components/Todo/AddWork";
 import TodayTodo from "../Components/Todo/TodayTodo";
 
 const s = StyleSheet.create({
-    TodayView: {
+    UpcomingView: {
         flex: 1,
     },
     TodoView: {
@@ -19,7 +19,7 @@ const s = StyleSheet.create({
     }
 });
 
-function Today({navigation}) {
+function Upcoming({navigation}) {
     const projectData = useSelector(state => state.project.project);
 
     const renderTodo = ({item, index}) => {
@@ -28,14 +28,14 @@ function Today({navigation}) {
                 projectData={item}
                 projectIndex={index}
                 navigation={navigation}
-                today={true}
+                today={false}
             />
         );
     }
     
     return (
-        <View style={s.TodayView}>
-            <Header title={'오늘'} navigation={navigation}/>
+        <View style={s.UpcomingView}>
+            <Header title={'추후'} navigation={navigation}/>
             <FlatList
                 ListHeaderComponent={
                     <>
@@ -57,4 +57,4 @@ function Today({navigation}) {
     );
 }
 
-export default Today;
+export default Upcoming;
