@@ -79,6 +79,29 @@ function DeleteWork(state, action) {
 	return newState;
 }
 
+const updateWork = (projectIndex, workId, title, isToday, deadline) => ({
+	type: ACTION_UPDATE_WORK,
+	projectIndex, workId, title, isToday, deadline
+});
+
+function UpdateWork(state, action) {
+	let newState = { ...state };
+	const { projectIndex, workId, title, isToday, deadline } = action;
+	const workIndex = newState.project[projectIndex].works.findIndex(item => item.id === workId);
+	
+	newState.project[projectIndex].works[workIndex].title = title;
+	newState.project[projectIndex].works[workIndex].isToday = isToday;
+	newState.project[projectIndex].works[workIndex].deadline = deadline;
+
+	newState.project[projectIndex].works = [
+		...newState.project[projectIndex].works.slice(0, workIndex),
+		newState.project[projectIndex].works[workIndex],
+		...newState.project[projectIndex].works.slice(workIndex+1)
+	];
+
+	return newState;
+}
+
 const updateComplete = (projectIndex, workId, isChecked) => ({
 	type: ACTION_UPDATE_COMPLETE,
 	projectIndex, workId, isChecked
@@ -139,6 +162,14 @@ export const requestDeleteWork = (projectIndex, workId) => async (dispatch, getS
     }
 }
 
+export const requestUpdateWork = (projectIndex, workId, title, isToday, deadline) => async (dispatch, getState) => {
+    try {
+        dispatch(updateWork(projectIndex, workId, title, isToday, deadline));
+    } catch (err) {
+        console.log(`requestUpdateWork err: ${err}`);
+    }
+}
+
 export const requestUpdateComplete = (projectIndex, workId, isChecked) => async (dispatch, getState) => {
     try {
         dispatch(updateComplete(projectIndex, workId, isChecked));
@@ -147,11 +178,10 @@ export const requestUpdateComplete = (projectIndex, workId, isChecked) => async 
     }
 }
 
-
 const initState = {
 	project: [
 		{ id: 0, title: '할 일', works: [] }
-	]
+	],
 }
 
 export default function projectReducer(state = initState, action) {
