@@ -41,23 +41,23 @@ function TodoList({title, isCompleted, projectIndex, workId, isToday, deadline, 
                 style={s.CheckBoxView}
             />
             <View style={{flex: 1}}>
-            <TouchableOpacity 
-                activeOpacity={1}
-                style={{flex: 1, justifyContent:'center'}}
-                onPress={() => {
-                    navigation.push('AddWork', {
-                        isEditing: true,
-                        projectIndex: projectIndex,
-                        workId: workId,
-                        workName: title,
-                        deadline: deadline
-                    })
-                }}
-            >
-           
-                <Text style={s.TextView}>{title}</Text>
-                <Text>{isToday ? '오늘' : dateToString(new Date(deadline))}</Text>
-            </TouchableOpacity>
+                <TouchableOpacity 
+                    activeOpacity={1}
+                    style={{flex: 1, justifyContent:'center'}}
+                    onPress={() => {
+                        navigation.push('AddWork', {
+                            isEditing: true,
+                            projectIndex: projectIndex,
+                            workId: workId,
+                            workName: title,
+                            deadline: deadline,
+                            isCompleted: isCompleted
+                        })
+                    }}
+                >
+                    <Text style={s.TextView}>{title}</Text>
+                    <Text>{isToday ? '오늘' : dateToString(new Date(deadline))}</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );

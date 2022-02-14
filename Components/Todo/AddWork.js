@@ -32,6 +32,7 @@ function AddWork({navigation, index}) {
                     workId: null,
                     workName: '',
                     deadline: null,
+                    inCompleted: false
                 })
             }}
         >
