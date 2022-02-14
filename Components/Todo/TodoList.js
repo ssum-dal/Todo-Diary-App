@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import CheckBox from "@react-native-community/checkbox";
 import { useDispatch } from "react-redux";
 import { requestUpdateComplete } from "../../Context/Reducer/projectReducer";
+import { dateToString } from "../../Utils/DateFormat";
 
 const s = StyleSheet.create({
     ListView: {
@@ -25,7 +26,7 @@ const s = StyleSheet.create({
     }
 });
 
-function TodoList({title, isCompleted, projectIndex, workId, navigation}) {
+function TodoList({title, isCompleted, projectIndex, workId, isToday, deadline, navigation}) {
     const [isChecked, setChecked] = useState(isCompleted);
     const dispatch = useDispatch();
 
@@ -48,12 +49,14 @@ function TodoList({title, isCompleted, projectIndex, workId, navigation}) {
                         isEditing: true,
                         projectIndex: projectIndex,
                         workId: workId,
-                        workName: title
+                        workName: title,
+                        deadline: deadline
                     })
                 }}
             >
            
                 <Text style={s.TextView}>{title}</Text>
+                <Text>{isToday ? '오늘' : dateToString(new Date(deadline))}</Text>
             </TouchableOpacity>
             </View>
         </View>

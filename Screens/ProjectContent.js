@@ -26,6 +26,8 @@ function ProjectContent({navigation, route}) {
                 isCompleted={item.isCompleted}
                 projectIndex = {index}
                 workId = {item.id}
+                isToday = {item.isToday}
+                deadline = {item.deadline}
                 navigation = {navigation}
             />
         );

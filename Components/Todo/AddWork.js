@@ -30,7 +30,8 @@ function AddWork({navigation, index}) {
                     isEditing: false,
                     projectIndex: index,
                     workId: null,
-                    workName: ''
+                    workName: '',
+                    deadline: null,
                 })
             }}
         >
