@@ -80,7 +80,7 @@ function AddProject({navigation, route}) {
                 >
                     <Icon name="close" color="#000000" size={30} style={{padding:5}}/>
                 </TouchableOpacity>
-                <Text style={s.TextView}>프로젝트 추가</Text>
+                <Text style={s.TextView}>{isEditing ? '프로젝트 수정' : '프로젝트 추가'}</Text>
                 <TouchableOpacity
                     style={s.AddView}
                     disabled={disabled}
