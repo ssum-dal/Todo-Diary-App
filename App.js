@@ -11,6 +11,9 @@ import Upcoming from "./Screens/Upcoming";
 import ProjectContent from "./Screens/ProjectContent";
 import AddProject from "./Screens/AddProject";
 import AddWork from "./Screens/AddWork";
+import Diary from "./Screens/Diary";
+import AddDiary from "./Screens/AddDiary";
+import DiaryContent from "./Screens/DiaryContent";
 
 const Stack = createStackNavigator();
 
@@ -52,6 +55,21 @@ const App = () => {
 					<Stack.Screen 
 						name="AddWork" 
 						component={AddWork} 
+						options={{headerShown: false, gestureEnabled: true}}
+					/>
+					<Stack.Screen 
+						name="Diary" 
+						component={Diary} 
+						options={{headerShown: false, gestureEnabled: true}}
+					/>
+					<Stack.Screen 
+						name="AddDiary" 
+						component={AddDiary} 
+						options={{headerShown: false, gestureEnabled: true}}
+					/>
+					<Stack.Screen 
+						name="DiaryContent" 
+						component={DiaryContent} 
 						options={{headerShown: false, gestureEnabled: true}}
 					/>
       			</Stack.Navigator>

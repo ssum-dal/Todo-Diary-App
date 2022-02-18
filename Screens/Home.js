@@ -72,6 +72,14 @@ function Home({navigation}) {
         ListHeaderComponent={
         	<>
         	<View style={s.TopView}>
+				<TouchableOpacity
+					activeOpacity={1}
+                	style={s.SubItem}
+                	onPress={() => navigation.push('Diary')}
+              	>
+                	<Icon name='calendar-outline' color='#CDF0EA' size={30} />
+                	<Text style={s.TextView}>일기</Text>
+              	</TouchableOpacity>
             	<TouchableOpacity
 					activeOpacity={1}
                 	style={s.SubItem}
