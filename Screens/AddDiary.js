@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { findDayofWeek } from "../Utils/DateFormat";
 import Modal from "react-native-modal";
 import { useDispatch } from "react-redux";
-import { requestAddDiary } from "../Context/Reducer/diaryReducer";
+import { requestAddDiary, requestUpdateDiary } from "../Context/Reducer/diaryReducer";
 
 const s = StyleSheet.create({
     AddDiaryView: {
@@ -53,14 +53,17 @@ const EmojiData = [
     {id: 2, emoji: '☹️'},
     {id: 3, emoji: '🤬'},
     {id: 4, emoji: '😭'},
+    {id: 5, emoji: '🥰'},
+    {id: 6, emoji: '😫'},
 ]
 
 function AddDiary ({navigation, route}) {
     const dispatch = useDispatch();
+    const isEditing = route.params.isEditing;
     const date = route.params.date;
-    const [textValue, setTextValue] = useState('');
+    const [textValue, setTextValue] = useState(route.params.content);
+    const [emotion, setEmotion] = useState(route.params.emoji);
     const [isVisible, setIsVisible] = useState(false);
-    const [emotion, setEmotion] = useState('😃');
 
     const year = date.slice(0, 4);
     const month = date.slice(5, 7);
@@ -89,6 +92,10 @@ function AddDiary ({navigation, route}) {
         dispatch(requestAddDiary(newDiary));
     }
 
+    const updateDiary = () => {
+        dispatch(requestUpdateDiary(date, textValue, emotion));
+    }
+
     return (
         <ScrollView style={s.AddDiaryView}>
             <View style={s.HeaderView}>
@@ -101,7 +108,11 @@ function AddDiary ({navigation, route}) {
                 <TouchableOpacity
                     style={s.HeaderIconView}
                     onPress={() => {
-                        addDiary();
+                        if (isEditing) {
+                            updateDiary();
+                        } else {
+                            addDiary();
+                        }
                         navigation.goBack();
                     }}
                 >

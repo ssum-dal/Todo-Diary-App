@@ -7,6 +7,12 @@ const s = StyleSheet.create({
     DiaryView: {
         flex: 1,
         backgroundColor: '#ffffff'
+    },
+    DateView: {
+        height: 100,
+    },
+    DateText: {
+        color: '#000000'
     }
 });
 
@@ -27,18 +33,21 @@ function Diary ({navigation}) {
                             onPress={() => {
                                 if (diary.length !== 0) {
                                     navigation.push('DiaryContent', {
-                                        data: diary[0]
+                                        data: diary[0],
                                     })
 
                                 } else {
                                     navigation.push('AddDiary', {
-                                        date: date.dateString
+                                        isEditing: false,
+                                        date: date.dateString,
+                                        content: '',
+                                        emoji: '😃'
                                     })
                                 }
                             }}
                         >
-                            <View style={{height: 100}}>
-                                <Text>{diary.length !== 0 ? diary[0].emoji : date.day}</Text>
+                            <View style={s.DateView}>
+                                <Text style={s.DateText}>{diary.length !== 0 ? diary[0].emoji : date.day}</Text>
                             </View>
                         </TouchableOpacity>
                     )
